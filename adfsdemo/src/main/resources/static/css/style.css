@@ -1,0 +1,518 @@
+﻿* {
+	margin:0px;
+	padding:0px;
+}
+html, body
+{
+    height:100%;
+    width:100%;
+    background-color:#ffffff;
+    color:#000000;
+    font-weight:normal;
+    font-family:"Segoe UI" , "Segoe" , "SegoeUI-Regular-final", Tahoma, Helvetica, Arial, sans-serif;
+    min-width:500px;
+    -ms-overflow-style:-ms-autohiding-scrollbar;
+}
+
+body
+{
+    font-size:0.9em;
+}
+
+#noScript { margin:16px; color:Black; }
+
+:lang(en-GB){quotes:'\2018' '\2019' '\201C' '\201D';}
+:lang(zh){font-family:微软雅黑;}
+
+@-ms-viewport { width: device-width; }
+@-moz-viewport { width: device-width; }
+@-o-viewport { width: device-width; }
+@-webkit-viewport { width: device-width;  }
+@viewport { width: device-width; }
+
+/* Theme layout styles */
+
+#fullPage, #brandingWrapper
+{
+    width:100%;
+    height:100%;
+    background-color:inherit;
+}
+#brandingWrapper
+{
+    background-color:#4488dd;
+}
+#branding
+{       
+    /* A background image will be added to the #branding element at run-time once the illustration image is configured in the theme. 
+       Recommended image dimensions: 1420x1200 pixels, JPG or PNG, 200 kB average, 500 kB maximum. */
+    height:100%;
+    margin-right: 600px;
+    margin-left:0px;
+    background-color:inherit;
+    background-repeat: no-repeat;
+    background-size:cover;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    -o-background-size:cover;
+}
+#contentWrapper
+{
+    position:relative;
+    width: 600px;
+    height:100%;
+    overflow:auto;
+    background-color:#ffffff; /* for IE7 */
+    margin-left: -600px;
+    margin-right:0px;
+}
+#content
+{
+    min-height:100%;
+    height: auto !important;
+    margin: 0 auto -65px auto;
+    padding: 0px 50px 0px 60px;
+     background-image:url(https://adfs.infinitus-int.com:8000/right_img.png); background-position:center; background-repeat:no-repeat;
+}
+#header
+{
+    font-size:2em;
+    font-weight:lighter;
+    font-family:"Segoe UI Light" , "Segoe" , "SegoeUI-Light-final", Tahoma, Helvetica, Arial, sans-serif;
+    padding-top: 30px;
+    margin-bottom:30px;
+    min-height:100px;
+    overflow:hidden;
+}
+#header img
+{
+    /* Logo image recommended dimension: 60x60 (square) or 350X35 (elongated), 4 kB average, 10 kB maximum. Transparent PNG strongly recommended. */
+    width:auto;
+    height:auto;
+}
+#workArea, #header
+{
+    word-wrap:break-word;
+    width: 500px;
+}
+
+#header{text-align:center; margin-bottom: 20px;}
+
+#workArea
+{
+    margin-bottom:90px;
+}
+#footerPlaceholder
+{
+    height:40px;
+}
+#footer
+{
+    height:35px;
+    padding:0px 50px 0px 50px;
+    position:relative;
+    color:#666666;
+    font-size:0.78em;
+}
+#footerLinks
+{
+    float:none;
+    padding-top:10px;
+	
+	text-align: center;
+}
+#copyright {color: #242424;
+    font-size: 14px;}
+.pageLink { color:#000000; padding-left:16px; }
+
+/* Common content styles */
+
+.clear {clear:both;}
+.float { float:left; } 
+.floatReverse { float:right; } 
+.indent { margin-left:16px; } 
+.indentNonCollapsible { padding-left:16px; }
+.hidden {display:none;}
+.notHidden {display:inherit;}
+.error { color:#e60012; }
+.actionLink { margin-bottom:8px; display:block; }
+a
+{
+    color:#e60012;
+    text-decoration:none;
+    background-color:transparent;
+}
+ul { list-style-type: disc; }
+h1,h2,h3,h4,h5,label { margin-bottom: 8px; }
+.submitMargin { margin-top:30px; margin-bottom:30px;text-align: center; position: relative; left: -15px;}
+.topFieldMargin { margin-top:8px; }
+.fieldMargin { margin-bottom:8px; }
+.groupMargin { margin-bottom:20px; text-align:center; } 
+
+#loginMessage{font-size:28px; text-indent: -999999px;}
+
+/*.groupMargin*/
+.sectionMargin { margin-bottom:64px; }
+.block { display: block; }
+.autoWidth { width:auto; }
+.fullWidth { width:342px; }
+.fullWidthIndent { width:326px; }
+input
+{
+    max-width:80%; 
+    font-family:inherit;
+    margin-bottom:8px;
+}
+input[type="radio"], input[type="checkbox"] {
+    vertical-align:middle;
+    margin-bottom: 0px;
+}
+span.submit, input[type="submit"]
+{
+    border:none;
+    background-color:#e60012;
+    min-width: 460px;
+    width:auto;
+    height:30px;
+    padding: 13px 0px 7px;
+    border-style:solid;
+    border-width:1px;
+    transition:background 0s;
+    color:rgb(255, 255, 255);
+    cursor:pointer;
+    margin-bottom:8px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-user-select:none;
+    -moz-transition:background 0s;
+    -webkit-transition:background 0s;
+    -o-transition:background 0s;
+    -webkit-touch-callout:none;
+    -webkit-user-select:none;
+    -khtml-user-select:none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select:none;
+     display: inline-block;
+    text-align: center;
+    font-size: 16px;
+}
+input[type="submit"]:hover,span.submit:hover
+{
+     background-color:#c10211;
+}
+input.text{
+    /*height: 50px;*/
+    padding: 17px 30px 17px 35px;
+    border: solid 1px #ebebeb;
+    background-color: #fafafa;
+    width:500px;
+    margin-bottom: 25px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	color:#b0b0b0;
+}
+input.text:focus
+{
+  border: 1px solid #6B6B6B;
+}
+
+#userNameInput2{ background-image:url(https://adfs.infinitus-int.com:8000/user.png); background-position: 8px 17px; background-repeat:no-repeat;}
+
+#userNameInput{background-image:url(https://adfs.infinitus-int.com:8000/user.png); background-position: 8px 17px; background-repeat:no-repeat;}
+
+#passwordInput{ background-image:url(https://adfs.infinitus-int.com:8000/lock.png); background-position: 8px 17px; background-repeat:no-repeat;}
+
+select
+{
+    height:28px;
+    min-width:60px;
+    max-width:100%; 
+    margin-bottom:8px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    box-shadow:none;
+    padding:2px;
+    font-family:inherit;
+}
+h1, .giantText
+{
+   font-size:2.0em; 
+   font-weight:lighter;
+}          
+h2, .bigText
+{
+   font-size:1.33em;
+   font-weight:lighter;
+}
+h3, .normalText
+{
+    font-size:1.0em;
+    font-weight:normal;
+}
+h4, .smallText
+{
+    font-size:0.9em;
+    font-weight:normal;
+}
+h5, .tinyText
+{
+    font-size:0.8em;
+    font-weight:normal;
+}
+.hint
+{
+    color:#999999;
+}
+.emphasis
+{
+    font-weight:700;
+    color:#2F2F2F;
+} 
+.smallIcon
+{
+    height:20px;
+    padding-right:12px;
+    vertical-align:middle;
+}
+.largeIcon
+{
+    height:48px;
+    /* width:48px; */
+    vertical-align:middle;
+}
+.largeTextNoWrap
+{
+    height:48px;
+    display:table-cell; /* needed when in float*/
+    vertical-align:middle;
+    white-space:nowrap;
+    font-size:1.2em;
+}
+.idp
+{
+    height:48px;
+    clear:both;
+    padding:8px;
+    overflow:hidden;
+}
+.idp:hover 
+{
+    background-color:#cccccc;
+}
+.idpDescription
+{
+    width:80%;
+}
+
+/* Form factor: intermediate height layout. Reduce space of the header. */
+@media only screen and (max-height: 820px) {
+    #header {
+        padding-top: 20px;
+        min-height:0px;
+        overflow: hidden;
+    }
+
+    #workArea
+    {
+        margin-bottom:30px; 
+    }
+}
+
+/* Form factor: intermediate height layout. Reduce space of the header. */
+@media only screen and (max-height: 500px) {
+    #header {
+        padding-top: 20px;
+        margin-bottom: 20px;
+    }
+    #workArea{
+        margin-bottom:30px; 
+    }
+}
+
+/* Form factor: intermediate layout (WAB in non-snapped view falls in here) */
+@media only screen and (max-width: 600px) {
+    html, body {
+        min-width: 260px;
+    }
+
+    #brandingWrapper {
+        display: none;
+    }
+
+    #contentWrapper {
+        float: none;
+        width: 100%;
+        margin: 0px auto;
+    }
+
+    #content, #footer, #header {
+        width: 400px;
+        padding-left: 0px;
+        padding-right: 0px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #workArea {
+        width: 100%;
+    }
+
+    .fullWidth {
+        width: 392px;
+    }
+
+    .fullWidthIndent {
+        width: 376px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+    body {
+        font-size: 0.8em;
+    }
+
+    #content, #footer {
+    width: auto;
+    padding-right: 33px;
+    margin-left: 25px;
+    margin-right: -5px;
+    }
+
+    #header {
+        width: auto;
+    }
+
+    span.submit, input[type="submit"] {
+        font-size: 0.9em;
+    }
+
+    .fullWidth
+    {
+        width:100%;
+        margin-left:auto;
+        margin-right:auto;
+    }
+
+    .fullWidthIndent {
+        width: 85%;
+    }
+
+    .idpDescription
+    {
+        width:70%;
+    }
+}
+
+/* Form factor: snapped WAB (for WAB to work in snapped view, the content wrapper width has to be set to 260px) */
+@media only screen and (max-width:280px)
+{
+    #contentWrapper
+    {
+        width:260px;
+    }
+    .idpDescription
+    {
+        max-width:160px;
+        min-width:100px;
+    }
+}
+
+form *{ text-align:left;}
+
+#loginArea{width: 100%;}
+
+.forgetpassword{text-align:right;width:464px;}
+
+#error{text-indent: -9999999px;}
+
+#UserTips{position:absolute;  right: -8px;
+    margin-top: -70px;}
+
+@media (max-width:676px)
+{
+    #loginMessage{ width:100%; font-size: 18px;}
+    #workArea{width:auto !important;}
+    .fullWidth{width:100%;}
+    input.text {width:80%;}
+    .forgetpassword{float: right;    margin-right: 10px;}
+    #loginArea{width:100% !important;}
+    span.submit, input[type="submit"] {    font-size: 1.2em;
+    min-width: 98%;
+    left: 4%;
+    position: relative;} 
+    #UserTips{right: -27px;}
+    #UserTips img{zoom: 0.8;}
+}
+
+@media (max-width:321px){
+    .forgetpassword {width:100%;}
+    input.text {width: 75%;}
+}
+
+
+@media (max-width:769px){
+
+	#header img{zoom:0.5;}	
+}
+
+#UserTips img{cursor:pointer;}
+
+#LoginTips{position:relative;background-color: #e9e8e8;margin:20px auto; color:#6e6e6e;font-size:14px;border:1px solid #d6d4d4;padding:10px 30px; line-height:22px ; width: 400px;
+    left: -15px;}
+
+#UserTipsText{ position: relative;top: -15px;width:100%;}
+
+#userNameArea{position:relative;}
+
+#verify{font-size:14px;color:#6e6e6e;margin-top:25px;}
+
+#verifyCode {
+    margin-left:10px;
+    height:40px;
+    border:1px solid #ebebeb;
+}
+
+#verifyImg{vertical-align:middle}
+
+
+
+/************ 输入账号，自动填充后缀  样式开始***************/
+#divIntelli {
+    width: 400px;
+    border: solid 1px #ebebeb;
+    background-color: #fafafa;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    color: #b0b0b0;
+    overflow: hidden;
+    z-index: 10000;
+    position: absolute;
+}
+
+.liSuffix {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+    .liSuffix span:first-child {
+        padding-left: 35px;
+        white-space: nowrap;
+    }
+
+    .liSuffix span:last-child {
+        padding-right: 30px;
+        white-space: nowrap;
+    }
+
+    .liSuffix.sufActive {
+        background-color: #ebebeb;
+    }
+
+/************ 输入账号，自动填充后缀  样式结束***************/

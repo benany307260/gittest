@@ -55,7 +55,9 @@ public class LoginController {
     	model.addAttribute("Token", token);
     	
     	AccountInfo accountInfo = new AccountInfo();
+    	accountInfo.setEmployeeID(username);
     	accountInfo.setAccount(username);
+    	accountInfo.setEmail(username);
     	accountInfo.setName(username);
     	accountInfo.setTokenTime(Long.toString(System.currentTimeMillis()));
     	OnlineInfo.onlineUserMap.put(token, accountInfo);
