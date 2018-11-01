@@ -27,6 +27,20 @@ public class LoginController {
         return "/front/dist/index";
 	}
 	
+	@RequestMapping("/logout.aspx")
+    public String toLogout(HttpServletRequest request, Model model) throws Exception 
+	{
+		// AppID
+    	String a = request.getParameter("a");
+    	// 登录成功后返回的Url地址
+    	String r = request.getParameter("r");
+		
+		model.addAttribute("AppID",a);
+        model.addAttribute("returnUrl", r);
+        
+        return "/front/dist/index";
+	}
+	
 /*	@RequestMapping("/GetAccInfo.aspx")
     public String getAccInfo(HttpServletRequest request, Model model) throws Exception 
 	{

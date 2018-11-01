@@ -20,8 +20,6 @@ public class AccController {
 		acc.setName("甄珍珠");
 		acc.setTokenTime(Long.toString(System.currentTimeMillis()));
 		
-		//String content = "{\"Account\":\"user1@infinitusportaltest.com\",\"Name\":\"user\",\"TokenTime\":\"201605251052542\"}";
-		
 		String content = JSON.toJSONString(acc);
 		
 		String appKey = "8773AAD318276EE8D8B3D01C1C8CA4665D80C132413E8292";
