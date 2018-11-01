@@ -15,16 +15,19 @@ public class AccController {
 	@RequestMapping("/GetAccInfo.aspx")
     public Object getAccInfo(HttpServletRequest request) throws Exception 
 	{
-		AccountInfo acc = new AccountInfo();
+		/*AccountInfo acc = new AccountInfo();
 		acc.setAccount("0001146");
 		acc.setName("甄珍珠");
-		acc.setTokenTime(Long.toString(System.currentTimeMillis()));
+		acc.setTokenTime(Long.toString(System.currentTimeMillis()));*/
 		
-		String content = JSON.toJSONString(acc);
+		String token = request.getParameter("Token");
+		
+		AccountInfo accountInfo = OnlineInfo.onlineUserMap.get(token);
+		
+		String content = JSON.toJSONString(accountInfo);
 		
 		String appKey = "8773AAD318276EE8D8B3D01C1C8CA4665D80C132413E8292";
 	
-		String token = request.getParameter("Token");
 		
 		ADFSSecurityUtil securityUtil = ADFSSecurityUtil.of(appKey);
         String decrypt = securityUtil.encrypt(token, content);

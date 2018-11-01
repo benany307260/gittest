@@ -41,35 +41,11 @@ public class LoginController {
         return "/front/dist/index";
 	}
 	
-/*	@RequestMapping("/GetAccInfo.aspx")
-    public String getAccInfo(HttpServletRequest request, Model model) throws Exception 
-	{
-		String content = "{\"Account\":\"user1@infinitusportaltest.com\",\"Name\":\"user\",\"TokenTime\":\"201605251052542\"}";
-		
-		String appKey = "8773AAD318276EE8D8B3D01C1C8CA4665D80C132413E8292";
-	
-		String token = request.getParameter("Token");
-		
-		ADFSSecurityUtil securityUtil = ADFSSecurityUtil.of(appKey);
-        String decrypt = securityUtil.encrypt(token, content);
-		
-        return decrypt;
-	}*/
-    
-    
-    /*@RequestMapping("/toLogin")
-    public String toLogin(HttpServletRequest request) 
-    {
-    	// AppID
-    	String a = request.getParameter("a");
-    	// 登录成功后返回的Url地址
-    	String r = request.getParameter("r");
-    	
-        return "redirect:login.html";
-    }*/
-    
     @RequestMapping("/login")
     public String login(HttpServletRequest request, RedirectAttributes model) {
+    	
+    	String username = request.getParameter("username");
+    	String password = request.getParameter("password");
     	
     	String AppID = request.getParameter("AppID");
     	String returnUrl = request.getParameter("returnUrl");
@@ -78,12 +54,14 @@ public class LoginController {
     	String token = DigestUtils.md5DigestAsHex(curTimeStr.getBytes());
     	model.addAttribute("Token", token);
     	
+    	AccountInfo accountInfo = new AccountInfo();
+    	accountInfo.setAccount(username);
+    	accountInfo.setName(username);
+    	accountInfo.setTokenTime(Long.toString(System.currentTimeMillis()));
+    	OnlineInfo.onlineUserMap.put(token, accountInfo);
+    	
         return "redirect:"+returnUrl;
     }
     
-    /*@RequestMapping("/sso")
-    public String sso() {
-        return "redirect:" + prefixUrl;
-    }*/
     
 }
