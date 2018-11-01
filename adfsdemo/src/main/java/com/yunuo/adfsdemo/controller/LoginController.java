@@ -24,28 +24,28 @@ public class LoginController {
 		model.addAttribute("AppID",a);
         model.addAttribute("returnUrl", r);
         
-        return "/front/dist/index";
+        return "/front/dist/login";
 	}
 	
 	@RequestMapping("/logout.aspx")
     public String toLogout(HttpServletRequest request, Model model) throws Exception 
 	{
-		// AppID
+		/*// AppID
     	String a = request.getParameter("a");
     	// 登录成功后返回的Url地址
     	String r = request.getParameter("r");
 		
 		model.addAttribute("AppID",a);
-        model.addAttribute("returnUrl", r);
+        model.addAttribute("returnUrl", r);*/
         
-        return "/front/dist/index";
+        return "/front/dist/logout";
 	}
 	
     @RequestMapping("/login")
     public String login(HttpServletRequest request, RedirectAttributes model) {
     	
-    	String username = request.getParameter("username");
-    	String password = request.getParameter("password");
+    	String username = request.getParameter("UserName");
+    	String password = request.getParameter("Password");
     	
     	String AppID = request.getParameter("AppID");
     	String returnUrl = request.getParameter("returnUrl");
