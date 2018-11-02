@@ -15,7 +15,26 @@
         
         <link rel="stylesheet" type="text/css" href="css/style.css" />
         <style>.illustrationClass {background-image:url(../image/illustration.jpg);}</style>
-
+		
+		<script src="./commonjs/jquery3.1.1.min.js"></script>
+		<script src="./commonjs/jquery.cookie.js"></script>
+		<script>
+            //通过token判断是否登录状态
+            (function () {
+                function urlredirect() {
+                	var token = $.cookie('Token');
+                	// 有token，跳转登出
+                	if(token != null && token.length > 0)
+                	{
+                		// 删除
+                		$.cookie('Token', '', { expires: -1 });
+                		$(location).attr('href', '/logout?Token='+token);
+                	}
+                }
+                urlredirect();
+            })();
+            
+        </script>
     </head>
     <body dir="ltr" class="body">
     <div id="noScript" style="position:static; width:100%; height:100%; z-index:100">

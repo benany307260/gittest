@@ -18,7 +18,22 @@
         <style>.illustrationClass {background-image:url(../image/illustration.jpg);}</style>
 		<script src="./commonjs/jquery3.1.1.min.js"></script>
 		<script src="./commonjs/jquery.cookie.js"></script>
-		
+		<script>
+            //通过token判断是否登录状态
+            (function () {
+                function urlredirect() {
+                	var token = $.cookie('Token');
+                	// 有token，直接登录
+                	if(token != null && token.length > 0)
+                	{
+                		$(location).attr('href', '/loginWithToken?Token='+token);
+                	}
+                	// 有token，表示已登录，后续请求接口可以直接用
+                }
+                urlredirect();
+            })();
+            
+        </script>
     </head>
     <body dir="ltr" class="body">
     <div id="noScript" style="position:static; width:100%; height:100%; z-index:100">
