@@ -23,7 +23,9 @@ public class LoginController {
 	@Autowired
 	UserInfoRepository userInfoRepository;
 	
-	private final static String loginHtml = "/front/dist/login";
+	private final static String loginHtml = "front/dist/login.html";
+	
+	private final static String logoutHtml = "front/dist/logout.html";
 	
 	/**
 	 * 跳转到登录页面
@@ -55,7 +57,7 @@ public class LoginController {
 		model.addAttribute("AppID",a);
         model.addAttribute("returnUrl", r);
         
-        return "/front/dist/login";
+        return loginHtml;
 	}
 	
 	/**
@@ -136,9 +138,9 @@ public class LoginController {
 		
 		OnlineInfo.LoginInfoMap.put(token, loginInfo);
 	
-		addCookie("Token", token, response);
+		addCookie(SystemContent.COOKIES_TOKEN_NAME, token, response);
     	// 跳回登录页面
-    	return "/front/dist/login";
+    	return loginHtml;
     }
     
 	/**
@@ -148,7 +150,7 @@ public class LoginController {
 	 * @return
 	 */
     @RequestMapping("/loginWithToken")
-    public String loginWithToken(HttpServletRequest request, RedirectAttributes model) {
+    public String loginWithToken(HttpServletRequest request, HttpServletResponse response, RedirectAttributes model) {
     	
     	String appID = request.getParameter("AppID");
     	String returnUrl = request.getParameter("returnUrl");
@@ -157,10 +159,12 @@ public class LoginController {
     	// 没传token，跳回登录页
     	if(token == null || token.trim().length() < 1)
     	{
-    		// 传参给页面
-    		model.addAttribute("AppID",appID);
-            model.addAttribute("returnUrl", returnUrl);
-            return "/front/dist/login";
+    		// 不能用RedirectAttributes传值，前端拿不到
+    		request.setAttribute("AppID",appID);
+    		request.setAttribute("returnUrl", returnUrl);
+            // 删除页面token
+            delCookie(SystemContent.COOKIES_TOKEN_NAME, response);
+            return loginHtml;
     	}
     	
     	// 传了token，取出token的用户信息
@@ -168,10 +172,12 @@ public class LoginController {
     	// 没拿到用户信息，跳回登录页面
     	if(loginInfo == null)
     	{
-    		// 传参给页面
-    		model.addAttribute("AppID",appID);
-            model.addAttribute("returnUrl", returnUrl);
-            return "/front/dist/login";
+    		// 不能用RedirectAttributes传值，前端拿不到
+    		request.setAttribute("AppID",appID);
+    		request.setAttribute("returnUrl", returnUrl);
+            // 删除页面token
+            delCookie(SystemContent.COOKIES_TOKEN_NAME, response);
+            return loginHtml;
     	}
 
     	returnUrl = loginInfo.getReturnUrl();
@@ -204,7 +210,7 @@ public class LoginController {
 		// 失效session
 		request.getSession().invalidate();*/
 		
-        return "/front/dist/logout";
+        return logoutHtml;
 	}
 	
     /**
@@ -224,7 +230,7 @@ public class LoginController {
     		OnlineInfo.LoginInfoMap.remove(token);
     	}
 		
-        return "/front/dist/logout";
+        return logoutHtml;
 	}
     
 	/**
@@ -243,6 +249,32 @@ public class LoginController {
 			Cookie cookie = new Cookie(name, encodeValue);
 			// 设置存在时间为5分钟
 			// cookie.setMaxAge(5 * 60);
+			// 设置作用域
+			// cookie.setPath("/");
+			// 将cookie添加到response的cookie数组中返回给客户端
+			response.addCookie(cookie);
+		} 
+		catch (Exception e) 
+		{
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 创建cookie，并将新cookie添加到“响应对象”response中
+	 * @param name
+	 * @param value
+	 * @param response
+	 */
+	public void delCookie(String name, HttpServletResponse response) 
+	{
+		try 
+		{
+			
+			// 创建新cookie
+			Cookie cookie = new Cookie(name, null);
+			// 设置为失效
+			cookie.setMaxAge(0);
 			// 设置作用域
 			// cookie.setPath("/");
 			// 将cookie添加到response的cookie数组中返回给客户端

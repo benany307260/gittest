@@ -18,15 +18,18 @@
         <style>.illustrationClass {background-image:url(../image/illustration.jpg);}</style>
 		<script src="./commonjs/jquery3.1.1.min.js"></script>
 		<script src="./commonjs/jquery.cookie.js"></script>
-		<script>
+		
+		<script th:inline="javascript">
             //通过token判断是否登录状态
             (function () {
                 function urlredirect() {
                 	var token = $.cookie('Token');
+                	var AppID = [[${AppID}]];
+                	var returnUrl = [[${returnUrl}]];
                 	// 有token，直接登录
                 	if(token != null && token.length > 0)
                 	{
-                		$(location).attr('href', '/loginWithToken?Token='+token);
+                		$(location).attr('href', '/loginWithToken?Token='+token+'&returnUrl='+returnUrl+'&AppID='+AppID);
                 	}
                 	// 有token，表示已登录，后续请求接口可以直接用
                 }
