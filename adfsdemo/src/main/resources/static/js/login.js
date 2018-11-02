@@ -1,7 +1,4 @@
 
-/*$('.btnUserLogin').on('click', function(){
-	submitUserLogin();
-});*/
 
 
 
@@ -12,4 +9,14 @@ function submitUserLogin() {
     $("#loginForm").submit();    //提交ID为myform的表单
 };
 
+/*$(document).ready(function(){
+	showErrMsg();
+});*/
 
+/*function showErrMsg() {
+	
+	var error = $("#errMsg").val();
+	console.log("3333");
+	console.log("aaa:"+$("#errorText").html());
+	$("#errorText").html(error);
+};*/

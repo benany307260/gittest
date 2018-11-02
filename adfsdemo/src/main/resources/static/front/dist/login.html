@@ -61,10 +61,11 @@
     <div id="loginArea">        
         <div id="loginMessage" class="groupMargin">使用你的组织帐户登录</div>
 
-        <form method="post" id="loginForm" autocomplete="off" novalidate="novalidate" onKeyPress="if (event && event.keyCode == 13) Login.submitLoginRequest();" action="/adfs/ls/?wa=wsignin1.0&wtrealm=https%3a%2f%2fadfs.infinitus-int.com%3a8000%2f&wctx=rm%3d0%26id%3dpassive%26ru%3d%252flogin.aspx&wct=2018-11-01T08%3a24%3a22Z&wreply=https%3a%2f%2fadfs.infinitus-int.com%3a8000%2fWebForm2.aspx" >
+        <form method="post" id="loginForm" autocomplete="off" novalidate="novalidate" onKeyPress="if (event && event.keyCode == 13) submitUserLogin();" action="" >
             
             <input type="hidden" id="AppID" name="AppID" th:value="${AppID}" />
 			<input type="hidden" id="returnUrl" name="returnUrl" th:value="${returnUrl}" />
+			<input type="hidden" id="errMsg" name="errMsg" th:value="${errMsg}" />
             
             <div id="error" class="fieldMargin error smallText">
                 <label id="errorText" for=""></label>
@@ -84,6 +85,13 @@
                     <input type="checkbox" name="Kmsi" id="kmsiInput" value="true" tabindex="3" />
                     <label for="kmsiInput">使我保持登录状态</label>
                 </div>
+                
+                <div>
+                	<div id="error" class="fieldMargin error smallText" style="text-indent: 0px;">
+                		<label id="errorText" th:text="${errMsg}" for=""></label>
+            		</div>
+            	</div>
+                
                 <div id="submissionArea" class="submitMargin">
                     <span id="submitButton" class="submit" tabindex="4" 
                         onKeyPress="if (event && event.keyCode == 32) submitUserLogin();" 
@@ -127,7 +135,7 @@
         </div> 
     </div>
 
-<script src="./js/login.js"></script>
+		<script src="./js/login.js"></script>
     </body>
 </html> 
 

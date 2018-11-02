@@ -6,16 +6,25 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.yunuo.adfsdemo.entity.UserInfo;
+import com.yunuo.adfsdemo.repository.UserInfoRepository;
+
 
 @Controller
 public class LoginController {
 
+	@Autowired
+	UserInfoRepository userInfoRepository;
+	
+	private final static String loginHtml = "/front/dist/login";
+	
 	/**
 	 * 跳转到登录页面
 	 * @param request
@@ -56,21 +65,60 @@ public class LoginController {
 	 * @return
 	 */
     @RequestMapping("/login")
-    public String login(HttpServletRequest request, HttpServletResponse response, RedirectAttributes model) {
+    public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
     	
 		String username = request.getParameter("UserName");
 		String password = request.getParameter("Password");
-		
 		String appID = request.getParameter("AppID");
 		String returnUrl = request.getParameter("returnUrl");
+		
+		if(username == null || username.trim().length() < 1)
+		{
+			// 传参给页面
+    		model.addAttribute("AppID",appID);
+            model.addAttribute("returnUrl", returnUrl);
+			model.addAttribute("errMsg", "请输入登录名");
+			// 跳回登录页面
+	    	return loginHtml;
+		}
+		if(password == null || password.trim().length() < 1)
+		{
+			// 传参给页面
+    		model.addAttribute("AppID",appID);
+            model.addAttribute("returnUrl", returnUrl);
+			model.addAttribute("errMsg", "请输入登录密码");
+			// 跳回登录页面
+	    	return loginHtml;
+		}
+		
+		UserInfo userInfo = userInfoRepository.findByUserName(username);
+		if(userInfo == null)
+		{
+			// 传参给页面
+    		model.addAttribute("AppID",appID);
+            model.addAttribute("returnUrl", returnUrl);
+			model.addAttribute("errMsg", "用户不存在");
+			// 跳回登录页面
+	    	return loginHtml;
+		}
+		if(!password.equals(userInfo.getPassword()))
+		{
+			// 传参给页面
+    		model.addAttribute("AppID",appID);
+            model.addAttribute("returnUrl", returnUrl);
+			model.addAttribute("errMsg", "登录密码不正确");
+			// 跳回登录页面
+	    	return loginHtml;
+		}
 		
 		String tokenTime = Long.toString(System.currentTimeMillis());
 		
 		AccountInfo accountInfo = new AccountInfo();
-		accountInfo.setEmployeeID(username);
-		accountInfo.setAccount(username);
-		accountInfo.setEmail(username);
-		accountInfo.setName(username);
+		accountInfo.setEmployeeID(userInfo.getEmployeeID());
+		accountInfo.setAccount(userInfo.getUserName());
+		accountInfo.setEmail(userInfo.getEmail());
+		accountInfo.setName(userInfo.getName());
+		accountInfo.setUpn(userInfo.getUpn());
 		accountInfo.setTokenTime(tokenTime);
 		
 		// 生成token
